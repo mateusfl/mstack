@@ -4,13 +4,16 @@ In this page you install the plugin, pick which models mstack uses, and run your
 
 ## Install the plugin
 
-In a Cursor chat, run:
+This copy is not on the Cursor marketplace. Cursor also rejects a symlink whose target sits outside `~/.cursor/plugins/local`. Copy the tree, then reload:
 
-```text
-/add-plugin mstack
+```bash
+mkdir -p ~/.cursor/plugins/local/mstack
+rsync -a --delete --exclude '.git/' ~/Projects/mstack/ ~/.cursor/plugins/local/mstack/
 ```
 
-Cursor confirms the plugin is installed.
+Command Palette → **Developer: Reload Window**. Confirm **mstack** under Customize → Plugins. After you edit this repo, run `rsync` again and reload, or the installed copy stays stale.
+
+Do not keep marketplace **pstack** installed at the same time: the leaf skills share names (`how`, `why`, `architect`).
 
 ## Pick your models
 
