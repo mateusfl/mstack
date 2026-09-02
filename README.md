@@ -23,7 +23,7 @@ Depois de editar este repo, rode o `rsync` de novo e recarregue. Sem isso a cóp
 
 Não instale a pstack do marketplace ao mesmo tempo. As folhas (`how`, `why`, `architect`, …) têm o mesmo nome e o agente mistura as duas.
 
-Dependência opcional: plugin [`cursor-team-kit`](https://cursor.com/marketplace) (`/deslop`, `control-ui`, `control-cli`). A mstack referencia essas skills e não as empacota.
+Dependência opcional: plugin [`cursor-team-kit`](https://cursor.com/marketplace) (`/deslop`; `control-ui` e `control-cli` só como fallback da ordem em `/mauri-mode`). A mstack referencia essas skills e não as empacota.
 
 ## Modelos
 
@@ -100,7 +100,7 @@ Lista completa no [guia](./docs/guide/README.md) e em [`skills/`](./skills/).
 
 ## O que não vem neste repo
 
-- `/deslop`, `control-cli`, `control-ui`: `cursor-team-kit`
+- `/deslop`, `control-cli`, `control-ui`: `cursor-team-kit` (prova ao vivo só depois de `verify-*` e um `control-*` no PATH)
 - `/create-skill`: built-in do Cursor
 - Overlay Lize (testes `scripts/`, OpenSpec, `CLAUDE.md`): repositório do produto
 - Pack [benny](./automations/benny/): automações Slack, não registrado como slash skill
