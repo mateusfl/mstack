@@ -81,12 +81,7 @@ Each phase needs both:
 
 **Static.** Type check, lint, project tests pass.
 
-**Runtime.** Exercise the feature on the matching surface via the relevant control skill:
-
-- Browser / Electron / Web UIs: the `control-ui` skill from the `cursor-team-kit` plugin.
-- CLIs and TUIs: the `control-cli` skill from the `cursor-team-kit` plugin.
-- Native mobile: whatever simulator-driving skill your team has.
-- No control skill for the touched surface: flag it in the plan.
+**Runtime.** Exercise the feature on the matching surface per the Non-negotiables order in the mauri-mode skill (project-local `verify-*` first, then the PATH `control-*` binary that skill names, then `control-ui` or `control-cli` from `cursor-team-kit`). Native mobile uses whatever simulator-driving skill your team has. No path for the touched surface: flag it in the plan.
 
 For bug fixes, the loop is reproduce on the surface, fix, verify on the same surface. Unit tests show a branch behaves a certain way; they do not prove the bug is gone (the **prove-it-works** principle skill).
 
