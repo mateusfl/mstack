@@ -10,9 +10,9 @@ Edit text to remove AI patterns and add human voice.
 ## Process
 
 1. Scan for the patterns below.
-2. Rewrite. Preserve meaning, match intended tone.
+2. Rewrite toward the positive form. Preserve meaning, match intended tone. A stack of bans ("don't do X, don't do Y") is a negative instruction cascade. The model swaps one tell for another instead of writing the sentence you wanted. Each fix below names the vice and states what to write instead. Show the rewrite. Do not pile don'ts.
 3. Add soul (see next section).
-4. Self-audit: "What makes this obviously AI generated?" Fix remaining tells.
+4. Self-audit: "What makes this obviously AI generated?" Fix remaining tells. Also ask: "Could a reader who does not already live in this thread recover the facts, the names, and what the thing is?" If not, you still have telegraphic style, curse of knowledge, or negative parallelism.
 
 ## Adding soul
 
@@ -40,7 +40,7 @@ Removing patterns is half the job. Sterile, voiceless writing is just as obvious
 
 7. **AI vocabulary.** Additionally, crucial, delve, enduring, enhance, fostering, garner, interplay, intricate, landscape (abstract), pivotal, showcase, tapestry (abstract), testament, underscore, vibrant. Replace with plain words.
 8. **Fancy ways to say "is".** "serves as", "stands as", "boasts", "features". Just say "is" or "has".
-9. **"Not just X, but Y."** State the point directly instead.
+9. **"Not just X, but Y."** State the point directly instead. Cousin of negative parallelism (34). The "not just" build and the "X is not Y, it's Z" build are the same habit. A fake correction of a belief the reader never held.
 10. **Rule of three.** Forcing ideas into groups of three. Use the natural number.
 11. **Synonym cycling.** Protagonist, main character, central figure, hero all in one paragraph. Pick one, repeat it.
 12. **False ranges.** "from X to Y" where X and Y aren't on a meaningful scale. List topics directly.
@@ -78,3 +78,13 @@ Removing patterns is half the job. Sterile, voiceless writing is just as obvious
 29. **Active voice.** Prefer it. Catch "is/are/was/were + past participle" and name the actor: "queries are validated" becomes "the compiler validates queries", "the file is parsed by the loader" becomes "the loader parses the file". Passive is fine only when the actor is unknown or genuinely doesn't matter.
 30. **Cut adverbs, or use a stronger verb.** "runs quickly" becomes "is fast" or the number. "significantly improves" becomes the measured delta. An adverb propping up a weak verb means the verb is wrong.
 31. **Prefer the plain word.** "utilize" becomes "use", "leverage" becomes "use", "facilitate" becomes "help", "numerous" becomes "many", "in the event that" becomes "if". The fancier synonym is rarely clearer.
+
+### Reader
+
+These three show up in agent prose even when the rest of this skill is clean. They make the reader work. Kill them on sight.
+
+32. **Telegraphic style.** Also called telegram style or telegraphese. The sentence drops articles, subjects, and verbs until it reads like a status ping. "PER-70 closed. Linear hits 1, 2, 4. Fails 3." "Auth ships Friday. Flags off. Rollback is the old build." A teammate already in the thread can decode that. Anyone else cannot tell what closed, who shipped, or what the numbers are. Write a full sentence. Subject, verb, the thing in the world. "Issue PER-70 is done. Linear meets ideals 1, 2, and 4, and misses 3." "Authentication goes out on Friday. Feature flags stay off. If we undo it, we ship the previous build." Compact is allowed when the user asked for a summary. Terse as the default voice is not.
+
+33. **Curse of knowledge.** The writer already knows the term, so the first mention skips what it is. "IndexedDB is not a file you own." "The crate still won't take a PathBuf." A reader who does not already know IndexedDB, or that crate means the Rust package, or that PathBuf is the path type, cannot use the rest of the paragraph. The first mention is the only cheap place to teach. "IndexedDB is the database the browser keeps on disk. The user cannot copy or export it as a file." "The Rust package still rejects a PathBuf, the standard type for file paths." After that the short name can walk alone. Unexplained jargon is not density. It is a closed door.
+
+34. **Negative parallelism.** Also called contrastive phrasing or antithesis. The default skeleton "X is not Y, it is Z" (or "X isn't Y: Z"). "Local-first isn't a fast app. The copy on the device is the primary." "This isn't a cache. It's the source of truth." Copywriters and speeches use the twist once, when the audience really does hold Y. Models use it as the shape of almost every paragraph because raters scored it as sophisticated. It invents a misconception so the sentence can knock it down. That is filler. State what the thing is, with the missing context. "In a local-first system the copy on the device is the primary. The server, if there is one, is one more peer." "This copy is the source of truth." Keep at most one contrast, and only where the confusion is real. If every paragraph opens by saying what the thing is not, you are performing a correction nobody asked for.
