@@ -69,6 +69,7 @@ O guia: [docs/guide](./docs/guide/README.md).
 | [pause safely](./skills/mauri-mode/playbooks/pause-safely.md) | suspender limpo para retomar depois |
 | [multi-phase plan](./skills/mauri-mode/playbooks/multi-phase-plan.md) | trabalho em fases ou PRs empilhados |
 | [worktree cleanup](./skills/mauri-mode/playbooks/worktree-cleanup.md) | podar worktrees mortos, com trava de segurança |
+| [opening a pr](./skills/mauri-mode/playbooks/opening-a-pr.md) | abrir um PR pronto, no fim de todo playbook de código |
 
 Todo playbook termina em [abrir um PR](./skills/mauri-mode/playbooks/opening-a-pr.md) quando há mudança de código.
 
@@ -87,6 +88,7 @@ O `/mauri-mode` já chama a maioria. Direto, quando quiser uma só:
 | [`/tdd`](./skills/tdd/SKILL.md) | teste que falha primeiro, depois o conserto |
 | [`/unslop`](./skills/unslop/SKILL.md) | tirar trejeito de IA da prosa |
 | [`/setup-mstack`](./skills/setup-mstack/SKILL.md) | mudar os modelos por papel |
+| [`/make-bot-ui`](./skills/make-bot-ui/SKILL.md) | página ou dashboard que acorda um Grok Bot por webhook |
 | [`/reflect`](./skills/reflect/SKILL.md) | virar lição da sessão em edição de skill |
 | [`/automate-me`](./skills/automate-me/SKILL.md) | gerar um `-mode` a partir do seu histórico |
 

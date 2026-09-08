@@ -13,7 +13,7 @@ rsync -a --delete --exclude '.git/' ~/Projects/mstack/ ~/.cursor/plugins/local/m
 
 Command Palette → **Developer: Reload Window**. Confirm **mstack** under Customize → Plugins. After you edit this repo, run `rsync` again and reload, or the installed copy stays stale.
 
-Do not keep marketplace **pstack** installed at the same time: the leaf skills share names (`how`, `why`, `architect`).
+Do not keep marketplace **pstack** installed at the same time. The leaf skills share names (`how`, `why`, `architect`).
 
 ## Pick your models
 
