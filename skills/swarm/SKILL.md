@@ -27,11 +27,11 @@ Open a todolist with one entry per phase before launching anything.
 
 ## Phase B: Fan out
 
-Spawn all N workers in one message with `subagent_type: generalPurpose`, `environment: "cloud"`, `run_in_background: true`, and the configured model. Use `environment: "local"` only when the worker needs access to something on the user's computer.
+Before spawning, inspect whether the target evidence and checkout are local or cloud. Spawn each worker with the environment that can actually reach its assigned files, process, credentials, and live surface. Do not default to cloud or local by habit. Every worker reports `pwd`, branch, status, worktree, and environment before writing or verifying. Use `subagent_type: generalPurpose`, `run_in_background: true`, and the configured model. For browser, web, or Electron evidence, prioritize `control-lize` and follow the screenshot, state, decision, action, repeat cycle in `skills/mauri-mode/references/control-lize.md`.
 
 When a worker must start from a non-default pushed branch, pass `cloud_base_branch`.
 
-Every brief stands alone. Include the goal, scope, exact slice or race arm, how to verify, and what to report. Reports use `PASS`, `ISSUES`, or `BLOCKED` with evidence.
+Every brief stands alone. Include the goal, scope, exact slice or race arm, how to verify, and what to report. For browser, web, or Electron verification, tell the worker to use `control-lize` first when it is on PATH and follow `skills/mauri-mode/references/control-lize.md`. Reports use `PASS`, `ISSUES`, or `BLOCKED` with evidence.
 
 If a worker drops out, proceed with N-1 and note it.
 

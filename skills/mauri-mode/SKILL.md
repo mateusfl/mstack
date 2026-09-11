@@ -14,6 +14,12 @@ reminder: New task? Playbook match or rigor needed -> apply /mauri-mode. Casual 
 
 **Start every multi-step task with a todolist whose first item is to read the Principles section below in full.** The Principles section grounds every trigger. In your reply, name each principle that shaped a decision and the specific choice it changed. Cite only principles whose leaf SKILL.md you read this session.
 
+**Match the language of the user's request and the project's reference material.** Write plans, reports, and other user-facing artifacts in that language. Keep code, identifiers, commands, and established technical terms in their original spelling. Do not let an English skill file override the language of the work.
+
+**Inspect the work context before editing.** Read [`references/work-context.md`](references/work-context.md) and determine whether the work is local or cloud from `pwd`, branch, status, worktrees, remotes, and available tools. Never infer the environment from the prompt or from another agent's session.
+
+**Use one branch by default.** Implement on one conventionally named task branch, verify the real surface, and open one PR only after explicit authorization. Keep commits local to that branch as useful. Do not open PRs for intermediate steps. Do not create stacked PRs or use Graphite unless the user explicitly requests that exceptional workflow.
+
 Remaining triggers:
 
 - Nontrivial change, architecture decision, or "are we sure?" → the **how** skill.
@@ -27,16 +33,16 @@ Remaining triggers:
 - Docs, RFCs, readmes, PR descriptions, or commit messages → the **technical-writing** skill (`/technical-writing`).
 - Before commit → the `deslop` skill from the `cursor-team-kit` plugin (`/deslop`).
 - Before review → the **no-comments** skill (`/no-comments`).
-- Shipping UI / IDE / CLI → prove it on the real surface, in this order. Do not skip to team-kit. Do not hardcode a product CLI such as `control-lize`.
-  1. If the current project has `.cursor/skills/verify-*/SKILL.md`, follow that skill.
-  2. Drive with the harness that skill names. If that name is a `control-*` binary on PATH (`which -a`, `type -p`, not a same-named script under `.cursor/skills/**/scripts/`), use the PATH binary. Never invoke a Playwright/Python wrapper that shares the binary's name.
-  3. Only if 1 and 2 do not apply: `control-ui` (web/Electron) or `control-cli` (CLI/TUI) from `cursor-team-kit`.
+- Shipping UI / IDE / CLI → prove it on the real surface. For browser, web, and Electron surfaces, prioritize `control-lize` when `command -v control-lize` finds it. Read [`references/control-lize.md`](references/control-lize.md) and follow its screenshot, state, decision, action, and repeat cycle. Do not replace it with a Playwright or Python wrapper.
+  1. Browser, web, and Electron. Run `control-lize doctor` and the product-specific doctor when applicable. Use the same `CONTROL_LIZE_WORK_SESSION` for the task. If the doctor reports a missing `agent-browser` socket directory, set `AGENT_BROWSER_SOCKET_DIR` to a writable directory and run it again. Use a fallback only when `control-lize` is unavailable or still fails after the environment fix.
+  2. Other UI surfaces. If the current project has `.cursor/skills/verify-*/SKILL.md`, follow that skill and its named harness. If it names a `control-*` binary on PATH (`which -a`, `type -p`, not a same-named script under `.cursor/skills/**/scripts/`), use the PATH binary.
+  3. Only when the earlier paths do not apply, use `control-ui` for web/Electron or `control-cli` for CLI/TUI from `cursor-team-kit`.
   For bug fixes, reproduce first on the same surface yourself. Hand to the user only under the narrow Bug fix step 1 exception.
 - Any PR-status request → the **Babysit** playbook (`playbooks/babysit.md`), and not Cursor's built-in babysit skill, whose description matches the same words. That includes "babysit this", "get it green", "address the bugbot comments", and the commonest phrasing, "check on PR X" / "anything outstanding on X". Never triggered by merely opening a PR. Declare its mode before polling. The playbook's step 1 owns the request-to-mode mapping. Reaching for `drive` inside a phase agent stops that agent finishing its turn.
 - Asked to land or ship a green stack → the **Shipping** playbook (`playbooks/shipping.md`). Green is not safe. Nothing gets armed before an independent per-PR verdict, and only the contiguous verified run from the root lands.
 - Bugbot or the agentic security review commented → skeptical posture. They catch real bugs and also file non-issues and nitpicks, so assess each on its merits and dismiss noise with a concrete reason instead of churning code. Triage fix / dismiss / ask per `references/bugbot-triage.md`.
-- Broken skill mid-task → fix it in its own PR. Don't block. Don't silently work around it.
-- Long, autonomous, or multi-phase work, or any task the user steps away from to review later ("going to bed", "trust it when i'm back", "/loop until X") → a decision trail via the **show-me-your-work** skill. Commit it when stakes need an auditable record. Keep it local otherwise.
+- Broken skill mid-task → fix it in the current task branch when in scope, verify it, and report it. Do not open a separate PR unless the user authorizes that delivery.
+- Long or autonomous work, or any task the user steps away from to review later ("going to bed", "trust it when i'm back", "/loop until X") → a decision trail via the **show-me-your-work** skill. Commit it when stakes need an auditable record. Keep it local otherwise. A normal plan does not arm `/loop`, `/goal`, or a decision trail unless its scope or duration makes them useful.
 
 ## Principles
 
@@ -109,7 +115,7 @@ Write the reply clean as you draft it. A cleanup pass after drafting does not re
 - **Frame impact for the consumer and the maintainer.** Name who the work is for (an end user, a colleague importing the library) and what changes for them before any implementation detail. Then what the next engineer who owns this code inherits. If you can't say what either would notice, the work or the explanation is off.
 - **Never fabricate a link, citation, or transcript reference.** Link only artifacts you produced or read this session.
 
-Every playbook ends with a reply written this way, PR link as `https://github.com/<owner>/<repo>/pull/<number>`. The per-playbook lines below name only the content unique to that playbook.
+Every playbook ends with a reply written this way. Include the environment, branch, changes, verification evidence, and remaining status. Include a PR link only when the user explicitly authorized and the playbook actually opened one. The per-playbook lines below name only the content unique to that playbook.
 
 ## Comments
 
@@ -119,7 +125,7 @@ Comments follow the same rule as the reply. Write them clean as you go. Keep a c
 
 Open a todolist whose first items are the matched playbook's steps, copied in verbatim, before any task-specific todos. A step you choose not to do stays in the list with a one-line `skip: <reason>`. Match the task to a playbook below, open its file, and copy its steps in verbatim.
 
-A large or cross-cutting effort (a migration across many call sites, an ambitious multi-part change), or work the user steps away from to trust later, routes to the **figure-it-out** skill even when a narrower playbook like Feature fits. Use **figure-it-out** whenever no bundled playbook fits. It designs a bespoke, rigorous playbook for the task. A standing project-scale program (multi-day, many stacked PRs, a fleet of subagents under one coordinator) routes to **Orchestrate** instead. figure-it-out designs one bespoke run, orchestrate runs the program.
+A request to write a plan alone uses the plan playbook and stops at the plan. It does not become an autonomous run because the plan has phases. A large or cross-cutting effort that needs a bespoke workflow, or work the user steps away from to trust later, routes to the **figure-it-out** skill. Use **figure-it-out** whenever no bundled playbook fits. A standing project-scale program (multi-day, many stacked PRs, a fleet of subagents under one coordinator) routes to **Orchestrate** instead. figure-it-out designs one bespoke run, orchestrate runs the program.
 
 - **Investigation.** Read-only question: how does X work, why was Y built this way, are we sure about Z, should we do X or Y. `playbooks/investigation.md`.
 - **Bug fix.** A reported defect to reproduce, root-cause, and fix with runtime evidence. `playbooks/bug-fix.md`.
@@ -143,4 +149,4 @@ A large or cross-cutting effort (a migration across many call sites, an ambitiou
 - **Pause safely.** Suspending in-flight work cleanly so it can be resumed, on an explicit pause, going offline, a Cursor restart, or imminent context compaction. The complement to Session pickup. Full steps: `playbooks/pause-safely.md`.
 - **Multi-phase or multi-PR plan.** Work that spans phases or stacked PRs. `playbooks/multi-phase-plan.md`.
 - **Worktree and simulator cleanup.** Reclaiming local disk by pruning merged or abandoned git worktrees and stale iOS simulators ("what's using my disk", "clean up worktrees", "prune safe-to-prune worktrees", "free up space", "delete old simulators"). `playbooks/worktree-cleanup.md`.
-- **Opening a PR.** Invoked at the end of every other playbook. `playbooks/opening-a-pr.md`.
+- **Opening a PR.** Explicit final delivery step after the branch is validated. It opens one PR for the current branch and never creates a stack by default. `playbooks/opening-a-pr.md`.

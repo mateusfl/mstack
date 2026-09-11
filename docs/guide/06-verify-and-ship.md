@@ -1,4 +1,4 @@
-# Verify the result and open a PR
+# Verify the result and open one PR when authorized
 
 "It compiles" is not evidence. The [Prove It Works principle](../../skills/principle-prove-it-works/SKILL.md) makes the agent check the real artifact before it reports success, and your job is to make "the real artifact" checkable. This page covers stating a finish condition, generating a verification skill for your app, opening the PR, and driving it to merged.
 
@@ -32,7 +32,7 @@ The UI bullet above hides a real requirement. The agent needs a scripted way to 
 /create-verification-skill
 ```
 
-[`/create-verification-skill`](../../skills/create-verification-skill/SKILL.md) interviews the repository, not you. It works out what a user touches, how the app launches locally, what can drive it (a PATH `control-*` binary first, then an in-repo harness, then browser and CDP, a PTY, or plain HTTP), what evidence proves behavior, and whether two instances can run side by side. It asks you only what the code can't answer.
+[`/create-verification-skill`](../../skills/create-verification-skill/SKILL.md) interviews the repository, not you. It works out what a user touches, how the app launches locally, what can drive it (`control-lize` first for browser, web, and Electron when it is on PATH, then the project-local harness or named PATH `control-*` binary, then browser and CDP, a PTY, or plain HTTP), what evidence proves behavior, and whether two instances can run side by side. It asks you only what the code can't answer.
 
 It writes `.cursor/skills/verify-<app>/`, agent-facing instructions with exact Launch, Doctor, Drive, Evidence, and Cleanup sections, plus a feature map under `features/` that indexes what the app does and what result proves each feature works. The skill ships a [worked feature-map example](../../skills/create-verification-skill/references/feature-map-example/) with a README index and one file per feature using the four required H2s. Before handing it over, the generator proves the skill once end to end: launch, doctor check, drive one feature, capture evidence, clean up. If that proof fails, don't use the output.
 
@@ -56,7 +56,7 @@ Apps change and feature maps rot. When yours drifts, run:
 /mauri-mode open the pr. small ordered commits, evidence in the description.
 ```
 
-The [Opening a PR playbook](../../skills/mauri-mode/playbooks/opening-a-pr.md) works from a worktree, rebases the work into small ordered commits, cleans the diff, unslops the prose, and returns the PR link. Five narrow PRs beat one fat one, and stacked follow-ups beat a growing branch.
+The [Opening a PR playbook](../../skills/mauri-mode/playbooks/opening-a-pr.md) is an explicit final step. It checks the actual work context, preserves the validated task branch, cleans the diff, unslops the prose, and opens one PR only after the user authorizes it. Intermediate PRs, stacked follow-ups, and Graphite are not the default.
 
 ## Drive the PR to merge-ready with Babysit
 

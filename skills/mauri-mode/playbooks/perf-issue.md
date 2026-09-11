@@ -2,7 +2,7 @@
 
 **You own the measurement story. Plan, review, verify the numbers.** Tie every fix to a measurement, don't read source instead of measuring.
 
-1. Capture a baseline trace via the matching control skill.
+1. Capture a baseline trace via the matching control skill. For browser, web, or Electron targets, use `control-lize` first when it is on PATH and follow `../references/control-lize.md` for the interaction and state checks.
 2. `how` to ground hypotheses. Don't claim a perf ceiling without running it first.
    Most fixes come from eight strategy families. Use them as hypothesis generators, not a checklist. A family earns an attempt only when the trace shows the signal it names.
    - **Elimination.** Before optimizing the hot path, ask whether it needs to exist: a computation nobody consumes, a feature gate that's always off for this user, a sync that redundantly mirrors state, a legacy path kept "just in case". The trace shows what's slow, never that it's deletable, so this family needs the `how` pass, not the profiler.
@@ -16,8 +16,8 @@
 3. Plan the fix from the trace. If it crosses a function boundary, `architect` first. Delegate implementation to a subagent using your configured perf-issue model (default `claude-fable-5-1-thinking-max`). Review the diff. Capture a post-fix trace.
    Apply the **sequence-verifiable-units** principle skill, verifying each attempt before trying the next.
 4. Parse and compare the artifacts (JSON to sqlite, diff). "Inconclusive" or wrong-surface is not a pass. Flag it.
-5. Cite the measurement in the PR.
-6. Run **Opening a PR**.
+5. Cite the measurement in the final branch report. Carry it into the PR later if the user asks to open one.
+6. Stop with the validated task branch. Run **Opening a PR** only after the user explicitly requests it.
 
 For sustained improvement against a metric rather than a one-off fix, use the Hillclimb playbook (`playbooks/hillclimb.md`).
 

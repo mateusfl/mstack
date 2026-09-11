@@ -152,6 +152,8 @@ If no routing map is configured, triage may classify a report but must not guess
 
 Read `../reproduce-and-fix-issues/references/control-adapter.md` and the user's completed feature map.
 
+For a browser, web, or Electron target, check `command -v control-lize` before accepting another control path. When it is available, use it first and require the screenshot, state, decision, action, and repeat cycle from `skills/mauri-mode/references/control-lize.md`.
+
 Confirm that the named skill can:
 
 - Bring up the target app

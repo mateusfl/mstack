@@ -127,6 +127,8 @@ If no operations channel is configured, keep detailed status in the automation r
 
 Read `references/control-adapter.md` and the completed map at `control.feature_map_path`, then invoke the skill named by `control.skill_name`.
 
+For a browser, web, or Electron target, use `control-lize` first when it is on PATH and follow `skills/mauri-mode/references/control-lize.md`. Keep one `CONTROL_LIZE_WORK_SESSION` across the run. Each interaction must use the screenshot, state check, decision, one action, and repeat cycle.
+
 Find the feature-map section that matches the reported user path. Read it before driving the app. If no section covers the feature, mark the run blocked instead of inventing a path or selector.
 
 Require all seven capabilities:

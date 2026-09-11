@@ -32,6 +32,8 @@ Return:
 
 The adapter must distinguish the target app from a similar window, shell, or production instance.
 
+For browser, web, and Electron targets, use `control-lize` first when `command -v control-lize` finds it. Follow the browser loop in `skills/mauri-mode/references/control-lize.md`.
+
 ### Drive UI
 
 Perform real user actions:
@@ -49,6 +51,8 @@ Prefer roles, labels, and stable selectors. Use coordinates only after a fresh s
 Return each action and the observed state change.
 
 Do not set internal state, call hidden app methods, write directly to storage, or inject DOM changes to create the symptom.
+
+Every UI interaction follows `screenshot -> inspect state -> decide -> one action -> repeat`. A successful action result is not evidence that the product changed state. Confirm the result in the next screenshot and state check.
 
 ### Drive mapped features and states
 

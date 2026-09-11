@@ -23,7 +23,7 @@ Depois de editar este repo, rode o `rsync` de novo e recarregue. Sem isso a cóp
 
 Não instale a pstack do marketplace ao mesmo tempo. As folhas (`how`, `why`, `architect`, …) têm o mesmo nome e o agente mistura as duas.
 
-Dependência opcional: plugin [`cursor-team-kit`](https://cursor.com/marketplace) (`/deslop`; `control-ui` e `control-cli` só como fallback da ordem em `/mauri-mode`). A mstack referencia essas skills e não as empacota.
+Dependência opcional: plugin [`cursor-team-kit`](https://cursor.com/marketplace) (`/deslop`; `control-ui` e `control-cli` só como fallback da ordem em `/mauri-mode`). Quando disponível, `control-lize` é o caminho prioritário para browser, web e Electron. A mstack referencia essas ferramentas e não as empacota.
 
 ## Modelos
 
@@ -69,9 +69,9 @@ O guia: [docs/guide](./docs/guide/README.md).
 | [pause safely](./skills/mauri-mode/playbooks/pause-safely.md) | suspender limpo para retomar depois |
 | [multi-phase plan](./skills/mauri-mode/playbooks/multi-phase-plan.md) | trabalho em fases ou PRs empilhados |
 | [worktree cleanup](./skills/mauri-mode/playbooks/worktree-cleanup.md) | podar worktrees mortos, com trava de segurança |
-| [opening a pr](./skills/mauri-mode/playbooks/opening-a-pr.md) | abrir um PR pronto, no fim de todo playbook de código |
+| [opening a pr](./skills/mauri-mode/playbooks/opening-a-pr.md) | abrir uma única PR depois de validar a branch, sob pedido explícito |
 
-Todo playbook termina em [abrir um PR](./skills/mauri-mode/playbooks/opening-a-pr.md) quando há mudança de código.
+O fluxo padrão termina com a branch validada. [Abrir uma PR](./skills/mauri-mode/playbooks/opening-a-pr.md) é uma etapa posterior e explícita.
 
 ### Skills avulsas
 
@@ -102,7 +102,7 @@ Lista completa no [guia](./docs/guide/README.md) e em [`skills/`](./skills/).
 
 ## O que não vem neste repo
 
-- `/deslop`, `control-cli`, `control-ui`: `cursor-team-kit` (prova ao vivo só depois de `verify-*` e um `control-*` no PATH)
+- `/deslop`, `control-cli`, `control-ui`: `cursor-team-kit` (fallback para prova ao vivo; `control-lize` tem prioridade em browser, web e Electron)
 - `/create-skill`: built-in do Cursor
 - Overlay Lize (testes `scripts/`, OpenSpec, `CLAUDE.md`): repositório do produto
 - Pack [benny](./automations/benny/): automações Slack, não registrado como slash skill
